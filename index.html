@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate your exact age in years, months, and days with our Advanced Age Calculator. It's quick, accurate, and easy to use.">
     <title>Advanced Age Calculator</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f8f9fa;
             margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -27,10 +29,10 @@
             color: #fff;
             text-align: center;
             padding: 10px;
-            position: relative;
-            bottom: 0;
             width: 100%;
             font-size: 14px;
+            position: relative;
+            bottom: 0;
         }
         .container {
             background-color: #fff;
@@ -42,6 +44,16 @@
             margin: 20px auto;
             text-align: center;
             flex-grow: 1;
+        }
+        h1 {
+            font-size: 28px;
+            color: #343a40;
+        }
+        p {
+            font-size: 16px;
+            color: #6c757d;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
         input[type="date"] {
             width: 100%;
@@ -61,6 +73,7 @@
             cursor: pointer;
             font-size: 16px;
             margin-top: 10px;
+            width: 100%;
         }
         button:hover {
             background-color: #218838;
@@ -85,16 +98,19 @@
 </header>
 
 <div class="container">
-    <h2>Calculate Your Age</h2>
-    <p>Find out your exact age in years, months, and days.</p>
-    <input type="date" id="birthdate" placeholder="Select your birthdate">
-    <button onclick="calculateAge()">Calculate Age</button>
+    <h1>Calculate Your Age Instantly</h1>
+    <p>Welcome to our Advanced Age Calculator. This tool helps you determine your exact age in years, months, and days. Whether you need to know your age for personal, academic, or professional reasons, our calculator provides accurate results in just a few clicks.</p>
+    <form>
+        <label for="birthdate">Enter your birthdate:</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+        <button type="button" onclick="calculateAge()">Calculate Age</button>
+    </form>
     <div class="result" id="ageResult"></div>
     <div class="additional-info" id="additionalInfo"></div>
 </div>
 
 <footer>
-    &copy; 2024 Age Calculator. All rights reserved. | <a href="#" style="color: #fff;">Privacy Policy</a>
+    &copy; 2024 Advanced Age Calculator. All rights reserved. | <a href="#" style="color: #fff;">Privacy Policy</a>
 </footer>
 
 <script>
