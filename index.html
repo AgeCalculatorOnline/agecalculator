@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age Calculator</title>
+    <title>Advanced Age Calculator</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #e9ecef;
+            background-color: #f8f9fa;
             margin: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
         header {
-            background-color: #343a40;
+            background-color: #007bff;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -23,11 +23,11 @@
             text-transform: uppercase;
         }
         footer {
-            background-color: #343a40;
+            background-color: #007bff;
             color: #fff;
             text-align: center;
             padding: 10px;
-            position: absolute;
+            position: relative;
             bottom: 0;
             width: 100%;
             font-size: 14px;
@@ -37,9 +37,9 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
+            max-width: 500px;
             width: 100%;
-            margin: auto;
+            margin: 20px auto;
             text-align: center;
             flex-grow: 1;
         }
@@ -53,7 +53,7 @@
             box-sizing: border-box;
         }
         button {
-            background-color: #007bff;
+            background-color: #28a745;
             color: #fff;
             padding: 12px 24px;
             border: none;
@@ -63,7 +63,7 @@
             margin-top: 10px;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #218838;
         }
         .result {
             margin-top: 20px;
@@ -71,23 +71,30 @@
             font-weight: bold;
             color: #495057;
         }
+        .additional-info {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    Age Calculator
+    Advanced Age Calculator
 </header>
 
 <div class="container">
     <h2>Calculate Your Age</h2>
+    <p>Find out your exact age in years, months, and days.</p>
     <input type="date" id="birthdate" placeholder="Select your birthdate">
     <button onclick="calculateAge()">Calculate Age</button>
     <div class="result" id="ageResult"></div>
+    <div class="additional-info" id="additionalInfo"></div>
 </div>
 
 <footer>
-    &copy; 2024 Age Calculator. All rights reserved.
+    &copy; 2024 Age Calculator. All rights reserved. | <a href="#" style="color: #fff;">Privacy Policy</a>
 </footer>
 
 <script>
@@ -96,14 +103,22 @@
         const birthDate = new Date(birthdate);
         const today = new Date();
         let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        const dayDiff = today.getDate() - birthDate.getDate();
+        let months = today.getMonth() - birthDate.getMonth();
+        let days = today.getDate() - birthDate.getDate();
 
-        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        if (months < 0 || (months === 0 && days < 0)) {
             age--;
+            months = (12 + months) % 12;
         }
 
-        document.getElementById('ageResult').innerText = `You are ${age} years old.`;
+        if (days < 0) {
+            const previousMonth = new Date(today.getFullYear(), today.getMonth() - 1, birthDate.getDate());
+            days = Math.floor((today - previousMonth) / (1000 * 60 * 60 * 24));
+            months--;
+        }
+
+        document.getElementById('ageResult').innerText = `You are ${age} years, ${months} months, and ${days} days old.`;
+        document.getElementById('additionalInfo').innerText = `That's approximately ${(age * 12) + months} months or ${Math.floor((today - birthDate) / (1000 * 60 * 60 * 24))} days!`;
     }
 </script>
 
